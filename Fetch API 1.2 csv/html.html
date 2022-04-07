@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        getData()
+
+        async function getData(){
+            const responce = await fetch("ZonAnn.Ts+dSST.csv")
+            const data = await responce.text()
+            console.log(data)
+
+            const table = data.split("\n").slice(1)
+
+            table.forEach(row => {
+                const columns = row.split(',')
+                const year = columns[0]
+                const temp = columns[1]
+                console.log(year, temp)
+            })
+
+            console.log(table)
+
+            
+            
+
+
+        }
+
+        
+    </script>
+</body>
+</html>

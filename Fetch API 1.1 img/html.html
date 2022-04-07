@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css">
+    <title>Document</title>
+</head>
+<body id="main">
+    <h1>Fetch a Rainbow</h1>
+    <div>
+        <img class="rainbowImg" id="rainbow" src="" alt="" />
+    </div>
+
+    <script>
+        let array = ['rainbow.jpeg', 'rainbow2.jpeg', 'rainbow3.jpeg']
+
+        getRainbow().then(responce => {
+            console.log("Rainbow at DOM")
+        }).catch(error => {
+            console.error(error)
+        })
+
+        async function getRainbow(){
+            let link = "rainbow.jpeg"
+            for(let i = 0; i < array.length; i++){
+                const response = await fetch(array[i])
+                const blob = await response.blob()
+
+                document.getElementById("main").innerHTML+=`<div><img class="rainbowImg" src="" alt="" /></div>`;
+                document.getElementsByClassName("rainbowImg")[i].src = URL.createObjectURL(blob)
+            }
+        }
+
+    </script>
+
+    <!-- <script src="fetch_js.js"></script> -->
+</body>
+</html>

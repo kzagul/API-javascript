@@ -1,0 +1,13 @@
+#img1 {
+    width: 25%;
+    height: auto;
+}
+
+
+
+body div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

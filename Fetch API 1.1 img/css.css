@@ -1,0 +1,16 @@
+.rainbowImg {
+    display: flex;
+   
+    justify-content: center;
+    align-self: center;
+    width: 33%;
+    height: auto;
+    opacity: 80;
+}
+div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}
+

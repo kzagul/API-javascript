@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+</head>
+<body>
+
+    <canvas id="chart" width="400" height="400"></canvas>
+    
+    <script>
+        const xlabels = []
+        const ytemps = []
+
+        chartIt()
+
+        async function chartIt(){
+            const data = await getData()
+
+            const ctx = document.getElementById('chart').getContext('2d');
+            
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.xs,
+                    datasets: [{
+                        label: 'Amount of new object in our City',
+                        data: data.ys,
+                        fill: false,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            ticks: {
+                                // Include a dollar sign in the ticks
+                                callback: function(value, index, ticks) {
+                                    return value + '°';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        getData()
+
+        async function getData(){
+            const xs = []
+            const ys = []
+
+            const responce = await fetch("yearAmount.csv")
+            const data = await responce.text()
+
+            console.log(data)
+
+            const table = data.split("\n").slice(1)
+            table.forEach(row => {
+                const columns = row.split(';')
+                const year = columns[0]
+                xs.push(year)
+                const temp = columns[1]
+                ys.push(parseFloat(temp))
+                console.log(year, temp)
+            })
+            return {xs, ys}
+        }
+
+        
+    </script>
+</body>
+</html>
